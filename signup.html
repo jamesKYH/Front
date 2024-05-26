@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sejong Schedulerus</title>
+    <link rel="stylesheet" href="css/signup.css" />
+  </head>
+  <body>
+    <div class="signup-container">
+      <h1>학생인증</h1>
+      <p>학생 인증을 위해 집현캠퍼스 ID/PW와 동일하게 입력해주세요.</p>
+      <form id="signup-form" action="/signup" method="POST">
+        <div>
+          <label for="username">아이디:</label>
+          <input type="text" id="username" name="username" required />
+        </div>
+        <div>
+          <label for="password">비밀번호:</label>
+          <input type="password" id="password" name="password" required />
+        </div>
+        <div class="terms-container">
+          <input type="checkbox" id="agree-terms" name="agree-terms" />
+          <label for="agree-terms">
+            학생 인증을 위한
+            <a href="#" onclick="showTerms()">약관에 동의합니다</a>
+          </label>
+        </div>
+        <button type="submit" id="signup-button" disabled>인증하기</button>
+      </form>
+    </div>
+
+    <div id="terms-modal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeTerms()">&times;</span>
+        <h2>학생 인증을 위한 약관</h2>
+        <p>1.내용1</p>
+        <p>2.내용2</p>
+        <button onclick="acceptTerms()">동의</button>
+      </div>
+    </div>
+
+    <script src="/js/signup.js"></script>
+  </body>
+</html>

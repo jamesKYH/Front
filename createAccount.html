@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create Account</title>
+    <link rel="stylesheet" href="/css/createAccount.css" />
+  </head>
+  <body>
+    <div class="signup-container">
+      <h1>Create Account</h1>
+      <p>ID는 학번으로 설정하세요</p>
+      <form action="/submit" method="post">
+        <div class="form-group">
+          <label for="id">ID</label>
+          <input type="text" id="id" name="id" required />
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" required />
+        </div>
+        <button type="submit">Create Account</button>
+      </form>
+    </div>
+  </body>
+</html>

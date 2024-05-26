@@ -1,0 +1,56 @@
+/* 투두리스트 스타일 */
+#todo-form {
+    display: flex;
+    margin-bottom: 20px;
+  }
+  
+  #todo-form input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 10px;
+  }
+  
+  #todo-form button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #28a745;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  #todo-form button:hover {
+    background-color: #218838;
+  }
+  
+  #todo-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  #todo-list li {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  #todo-list li span {
+    flex: 1;
+  }
+  
+  #todo-list li button {
+    padding: 5px 10px;
+    border: none;
+    background-color: #dc3545;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  #todo-list li button:hover {
+    background-color: #c82333;
+  }
+  

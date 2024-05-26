@@ -1,0 +1,237 @@
+/* 전체 레이아웃 스타일 */
+.academic-schedule-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.calendar {
+    flex: 1;
+    padding: 20px;
+}
+
+.events-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding-left: 20px;
+}
+
+/* 헤더 스타일 */
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 0 20px;
+}
+
+.events-toggles {
+    display: flex;
+    gap: 15px;
+}
+
+.events-toggle {
+    display: flex;
+    align-items: center;
+}
+
+.events-toggle input {
+    margin-right: 5px;
+}
+
+.upcoming-events-label {
+    background-color: yellow;
+}
+
+
+.user-events-label {
+    background-color: lightblue;
+}
+
+/* 달력 스타일 */
+#calendar-container table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+#calendar-container th, 
+#calendar-container td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+}
+
+.calendar-month {
+    margin-bottom: 20px;
+}
+
+.calendar-month h3 {
+    text-align: center;
+    background-color: #f2f2f2;
+    padding: 10px 0;
+    margin: 0;
+    color: #8B0000; /* 어두운 빨간색 */
+}
+
+.calendar-month th,
+.calendar-month td {
+    width: 14.28%; /* 100% divided by 7 days */
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+.current-day {
+    position: relative;
+    color: #8B0000; /* 어두운 빨간색 */
+    font-weight: bold;
+}
+
+.current-day::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #8B0000; /* 어두운 빨간색 */
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.highlight-day {
+    background-color: yellow;
+    color: black;
+}
+
+.user-added-event {
+    background-color: lightblue;
+    color: black;
+}
+
+/* 반반 채우기 스타일 */
+.half-highlight-day {
+    background: linear-gradient(to right, yellow 50%, lightblue 50%);
+    color: black;
+}
+
+/* 이벤트 리스트 스타일 */
+.events {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.events h3 {
+    margin-top: 0;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #8B0000; /* 어두운 빨간색 */
+    color: #8B0000; /* 어두운 빨간색 */
+}
+
+.events ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.events li {
+    margin-bottom: 5px;
+    padding: 10px;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.events li button {
+    padding: 5px 10px;
+    background-color: #8B0000; /* 어두운 빨간색 */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.events li button:hover {
+    background-color: #600000; /* 더 어두운 빨간색 */
+}
+
+/* 모달 스타일 */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* 일정 추가 버튼 스타일 */
+#add-event-button-container {
+    text-align: right;
+    margin-top: 10px;
+    padding-right: 20px;
+}
+
+#add-event-button {
+    padding: 10px 20px;
+    background-color: #8B0000; /* 어두운 빨간색 */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#add-event-button:hover {
+    background-color: #600000; /* 더 어두운 빨간색 */
+}
+
+#message-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffdddd; /* 밝은 빨간색 배경 */
+    color: #8B0000; /* 어두운 빨간색 텍스트 */
+    border: 2px solid #8B0000; /* 어두운 빨간색 테두리 */
+    border-radius: 8px;
+    padding: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    align-content: center;
+    text-align : center
+}

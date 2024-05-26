@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>과목별 일정</title>
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/main_Home.css" />
+    <link rel="stylesheet" href="css/main_Subjects.css" />
+    <link rel="stylesheet" href="css/main_Todolist.css" />
+    <link rel="stylesheet" href="css/main_Calender.css" />
+    <style>
+      /* Additional styles if needed */
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <nav class="sidebar">
+        <ul>
+          <li><a href="#home" onclick="showContent('home')">Home</a></li>
+          <li>
+            <a href="#todolist" onclick="showContent('todolist')">투두리스트</a>
+          </li>
+          <li>
+            <a href="#subjects" onclick="showContent('subjects')"
+              >과목별 일정</a
+            >
+          </li>
+          <li>
+            <a
+              href="#academic-schedule"
+              onclick="showContent('academic-schedule')"
+              >학사 일정</a
+            >
+          </li>
+        </ul>
+      </nav>
+      <div class="content">
+        <div id="home" class="content-section active">
+          <h2>Home</h2>
+          <div class="profile-container">
+            <h3>내 정보</h3>
+            <button id="update-button">업데이트</button>
+            <p><strong>이름:</strong> <span id="user-name"></span></p>
+            <p><strong>학과:</strong> <span id="user-department"></span></p>
+            <p><strong>학번:</strong> <span id="user-id"></span></p>
+            <p><strong>듣는 과목:</strong> <span id="user-subjects"></span></p>
+          </div>
+        </div>
+        <div id="todolist" class="content-section" style="display: none">
+          <h2>투두리스트</h2>
+          <form id="todo-form">
+            <input type="text" placeholder="할 일을 입력하세요" required />
+            <button type="submit">추가</button>
+          </form>
+          <ul id="todo-list"></ul>
+        </div>
+        <div id="subjects" class="content-section" style="display: none">
+          <h2>과목별 일정</h2>
+          <div class="search-container">
+            <input
+              type="text"
+              placeholder="검색어를 입력하세요"
+              id="search-input"
+            />
+            <button id="clear-search-button">검색어 삭제</button>
+          </div>
+          <div class="filter-buttons-container">
+            <button class="filter-button" onclick="applyFilter('강의')">
+              강의
+            </button>
+            <button class="filter-button" onclick="applyFilter('과제')">
+              과제
+            </button>
+            <button class="filter-button" onclick="applyFilter('노재춘')">
+              노재춘
+            </button>
+            <button class="filter-button" onclick="applyFilter('변재욱')">
+              변재욱
+            </button>
+          </div>
+          <table id="subject-table">
+            <thead>
+              <tr>
+                <th>과목명</th>
+                <th>유형</th>
+                <th>마감기한</th>
+                <th>담당교수</th>
+              </tr>
+            </thead>
+            <tbody id="subject-schedule-list">
+              <!-- 데이터가 여기에 JavaScript를 통해 채워질 것입니다. -->
+            </tbody>
+          </table>
+          <div id="add-subject-button-container">
+            <button id="add-subject-button">과목 추가</button>
+          </div>
+        </div>
+        <div
+          id="academic-schedule"
+          class="content-section"
+          style="display: none"
+        >
+          <div class="header-container">
+            <h2>학사 일정</h2>
+            <div class="events-toggles">
+              <div class="events-toggle">
+                <input type="checkbox" id="show-upcoming-events" checked />
+                <label for="show-upcoming-events" class="upcoming-events-label"
+                  >다가오는 일정</label
+                >
+              </div>
+              <div class="events-toggle">
+                <input type="checkbox" id="show-user-events" checked />
+                <label for="show-user-events" class="user-events-label"
+                  >시험 일정</label
+                >
+              </div>
+            </div>
+          </div>
+          <div class="academic-schedule-container">
+            <div id="calendar-container" class="calendar"></div>
+            <div class="events-container">
+              <div id="event-list" class="events">
+                <h3>다가오는 일정</h3>
+                <ul id="event-list-ul"></ul>
+              </div>
+              <div id="user-event-list" class="events">
+                <h3>시험 일정</h3>
+                <ul id="user-event-list-ul"></ul>
+              </div>
+              <div id="message-container" class="events" style="display: none">
+                <p>일정을 선택하세요</p>
+              </div>
+            </div>
+          </div>
+          <div id="add-event-button-container">
+            <button id="add-event-button">일정 추가</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal for adding subjects -->
+    <div id="add-subject-modal" class="modal" style="display: none">
+      <div class="modal-content">
+        <span class="close-button">&times;</span>
+        <form id="subject-form">
+          <input type="text" id="subject-name" placeholder="과목명" required />
+          <select id="subject-type" required>
+            <option value="">유형 선택</option>
+            <option value="강의">강의</option>
+            <option value="과제">과제</option>
+            <option value="퀴즈">퀴즈</option>
+            <option value="기타">기타</option>
+          </select>
+          <input type="date" id="subject-deadline" required />
+          <input
+            type="text"
+            id="subject-professor"
+            placeholder="담당교수"
+            required
+          />
+          <button type="submit">추가</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Modal for adding events -->
+    <div id="add-event-modal" class="modal" style="display: none">
+      <div class="modal-content">
+        <span class="close-button">&times;</span>
+        <form id="event-form">
+          <input type="date" id="event-date" required />
+          <input type="time" id="event-time" required />
+          <input
+            type="text"
+            id="event-description"
+            placeholder="일정 설명"
+            required
+          />
+          <button type="submit">추가</button>
+        </form>
+      </div>
+    </div>
+
+    <script src="js/todoList.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/subjects.js"></script>
+    <script src="js/calender.js"></script>
+    <script src="js/main_Home.js"></script>
+  </body>
+</html>
