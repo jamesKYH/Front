@@ -9,14 +9,17 @@ document.querySelector('form').addEventListener('submit', function(event) {
       method: 'POST',
       body: formData,
     })
-      .then(response => response.json())
+      .then(response => response.text()) // 서버 응답을 텍스트로 받기
       .then(data => {
-        if (data.token) {
-          document.cookie = `token=${data.token}; path=/;`;
+        // data는 응답된 텍스트 데이터
+        const tokenMatch = data.match(/token=([^\s]+)/);
+        if (tokenMatch && tokenMatch[1]) {
+          const token = tokenMatch[1];
+          document.cookie = `token=${token}; path=/;`;
           alert('로그인 성공!');
           // Redirect or perform other actions after successful login
         } else {
-          alert('로그인 실패: ' + data.message);
+          alert('로그인 실패: ' + data);
         }
       })
       .catch(error => {
