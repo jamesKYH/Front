@@ -9,17 +9,25 @@ document.querySelector('form').addEventListener('submit', function(event) {
       method: 'POST',
       body: formData,
     })
-      .then(response => response.text()) // 서버 응답을 텍스트로 받기
-      .then(data => {
-        // data는 응답된 텍스트 데이터
-        const tokenMatch = data.match(/token=([^\s]+)/);
-        if (tokenMatch && tokenMatch[1]) {
-          const token = tokenMatch[1];
-          document.cookie = `token=${token}; path=/;`;
-          alert('로그인 성공!');
-          // Redirect or perform other actions after successful login
+      .then(response => {
+        if (response.ok) {
+          const token = response.headers.get('Authorization');
+          const hasAuthorizationHeader = response.headers.has('expires');
+          console.log(hasAuthorizationHeader);
+          if (token) {
+            alert('Login successful!');
+            localStorage.setItem('authToken', token); 
+            makeAuthorizedRequest(token);
+          } else {
+            response.headers.forEach((value, name) => {
+              console.log(`${name}: ${value}`);
+            });
+            alert('Login failed: No token received');
+          }
         } else {
-          alert('로그인 실패: ' + data);
+          return response.json().then(data => {
+            throw new Error(data.message || 'Login failed');
+          });
         }
       })
       .catch(error => {
@@ -27,4 +35,19 @@ document.querySelector('form').addEventListener('submit', function(event) {
         alert('로그인 중 오류가 발생했습니다.');
       });
   });
+  
+  function makeAuthorizedRequest(token) {
+    // 여기에 토큰을 사용하여 인증된 요청을 수행하는 코드를 작성하십시오.
+    console.log('Making authorized request with token:', token);
+    // 예시 요청
+    fetch('http://43.201.71.15:8080/some-secure-endpoint', {
+      method: 'GET',
+      headers: {
+        'Authorization': token
+      }
+    })
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error('Error:', error));
+  }
   
